@@ -1,0 +1,33 @@
+corg = carbonio organico
+rivedere conversione tra SO (sostanza organica) e Corg (carbonio organico)
+coefficiente: 1.72 per la conversione
+
+
+irrigutile da verificare con Raffaele
+
+l'umidità non supera la capacità di campo
+se l'umidità di campo è sotto CC allora il ks diminuisce
+
+Acqua disponibile massima varia in base al limite intervento irriguo che si basa sulla coltura
+Durante il disegno dei campi andrà inserito il tipo di coltura per la variazione del Lir
+La densAppar deve poter essere sovrascritto
+Parlare con Raffaele della pressione atmosferica e di G per la radiazione
+
+
+COMPLETATI:
+
+Prima cosa da fare ET0, acqua evaporata e traspirata (et0 viene calcolato in FormulaManager)
+Ricevere il bilancio idrico per la tabella di appoggio per il calcolo di Kc (BILANCIO IDRICO COPILLA ANDRINI_lz.xlsx)
+Il kc si usa per trovare l'evapotraspirazione della coltura di ETc (kc viene calcolato in FormulaManager)
+PA = punto di appassimento permanente OK
+CC = capacità di campo (valore stabile) OK
+CIM = capacità idrica massima OK
+Lir = limite intervento irriguo OK
+Approssimazione non accettata, bisogna individuare dove viene approssimato (approssimazione risolta)
+creare la parte di calcolo per le costanti del suolo (file FieldReport creato)
+Ks dipende da:
+PERCmm si calcola con UMIDmm(gp), Ete(gp), pioggia(gp) e irrigutile(gp)
+RUSCmm si calcola con UMIDmm(gp), Ete(gp), pioggia(gp) e irrigutile(gp)
+UMIDmm si calcola con UMIDmm(gp), Ete(gp), pioggia(gp) e irrigutile(gp) (file calculations ora contiene i calcoli)
+irrigutile mm va messo a 10mm ogni volta che il ks va in stress (<0.7) (formula in ks applicata)
+DensAppar = da calcolare attraverso la formula di Laura (calcolo con Corg)
