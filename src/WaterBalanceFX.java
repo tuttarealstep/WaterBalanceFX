@@ -6,9 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -45,25 +43,25 @@ public class WaterBalanceFX extends Application{
         
         
         //Stazione meteo
-        fileManager.stationFileSetup();
-        fileManager.stationDatasRegistration();
+        //fileManager.stationFileSetup();
+        //fileManager.stationDatasRegistration();
         //fileManager.stationDatasReport();
         
         //Campo
-        fileManager.fieldFileSetup();
-        fileManager.fieldDatasRegistration();
+        //fileManager.fieldFileSetup();
+        //fileManager.fieldDatasRegistration();
         //fileManager.fieldDatasReport();
         
         //Costanti del suolo
-        fileManager.constantFileSetup();
+        //fileManager.constantFileSetup();
         //Chiamata funzione costanti per registrarle e salvarle su file
-        forManager.constant();
+        //forManager.constant();
         //fileManager.constantDatasReport();
         
-        forManager.ete();
+        //forManager.ete();
         
         //Risultati delle formule
-        fileManager.calculationFileSetup();
+        //fileManager.calculationFileSetup();
         //fileManager.calculationsReport();
 
         launch(WaterBalanceFX.class);
@@ -75,11 +73,6 @@ public class WaterBalanceFX extends Application{
 
     @Override
     public void start(Stage window) throws Exception {
-        //Creo una schermata con titolo Bilancio Idrico
-        //Inserisco una colonna con titolo "setup" e 4 bottoni per il setup
-        //Inserisco una colonna con titolo "registration" e 3 bottoni per la registrazione
-        //Inserisco una colonna con titolo "report" e 4 bottoni per il report
-        //Inserisco un bottone per il calcolo dell'Ete
         
         FlowPane layout = new FlowPane();
         
@@ -90,9 +83,24 @@ public class WaterBalanceFX extends Application{
         setup.setAlignment(Pos.CENTER);
         
         Button button = new Button("setup station");
+        button.setOnAction((event) -> {
+            fileManager.stationFileSetup();
+        });
+        
         Button button1 = new Button("setup field");
+        button1.setOnAction((event) -> {
+            fileManager.fieldFileSetup();
+        });
+        
         Button button2 = new Button("setup constant");
+        button2.setOnAction((event) -> {
+            fileManager.constantFileSetup();
+        });
+        
         Button button3 = new Button("setup calculation");
+        button3.setOnAction((event) -> {
+            fileManager.calculationFileSetup();
+        });
         
         setup.getChildren().add(new Label("Setup:"));
         setup.getChildren().add(button);
@@ -107,8 +115,20 @@ public class WaterBalanceFX extends Application{
         register.setAlignment(Pos.CENTER);
         
         Button button4 = new Button("register station");
+        button4.setOnAction((event) -> {
+            fileManager.stationDatasRegistration();
+        });
+        
         Button button5 = new Button("register field");
+        button5.setOnAction((event) -> {
+            fileManager.fieldDatasRegistration();
+        });
+        
         Button button6 = new Button("register constant");
+        button6.setOnAction((event) -> {
+            forManager.constant();
+        });
+        //inserire dei dati già alla creazione del calculations
         //Button button7 = new Button("register calculation");
         
         register.getChildren().add(new Label("Register:"));
@@ -124,9 +144,24 @@ public class WaterBalanceFX extends Application{
         report.setAlignment(Pos.CENTER);
         
         Button button8 = new Button("report station");
+        button8.setOnAction((event) -> {
+            fileManager.stationDatasReport();
+        });
+        
         Button button9 = new Button("report field");
+        button9.setOnAction((event) -> {
+            fileManager.fieldDatasReport();
+        });
+        
         Button button10 = new Button("report constant");
+        button10.setOnAction((event) -> {
+            fileManager.constantDatasReport();
+        });
+        
         Button button11 = new Button("report calculation");
+        button11.setOnAction((event) -> {
+            fileManager.calculationsReport();
+        });
         
         report.getChildren().add(new Label("Report:"));
         report.getChildren().add(button8);
@@ -141,6 +176,9 @@ public class WaterBalanceFX extends Application{
         ete.setAlignment(Pos.CENTER);
         
         Button button12 = new Button("ete");
+        button12.setOnAction((event) -> {
+            forManager.ete();
+        });
         
         ete.getChildren().add(new Label("Ete:"));
         ete.getChildren().add(button12);
