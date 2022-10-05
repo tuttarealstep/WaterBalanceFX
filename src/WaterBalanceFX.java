@@ -6,11 +6,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
 
 public class WaterBalanceFX extends Application{
     
@@ -77,36 +77,20 @@ public class WaterBalanceFX extends Application{
         FlowPane layout = new FlowPane();
         
         //Colonna del setup
-        VBox setup = new VBox();
-        setup.setSpacing(5);
-        setup.setPadding(new Insets(10,10,10,10));
-        setup.setAlignment(Pos.CENTER);
+        VBox box = new VBox();
+        box.setSpacing(5);
+        box.setPadding(new Insets(10,10,10,10));
+        box.setAlignment(Pos.CENTER);
         
-        Button button = new Button("setup station");
-        button.setOnAction((event) -> {
+        Button setupButton = new Button("SETUP");
+        setupButton.setOnAction((event) -> {
             fileManager.stationFileSetup();
-        });
-        
-        Button button1 = new Button("setup field");
-        button1.setOnAction((event) -> {
             fileManager.fieldFileSetup();
-        });
-        
-        Button button2 = new Button("setup constant");
-        button2.setOnAction((event) -> {
             fileManager.constantFileSetup();
-        });
-        
-        Button button3 = new Button("setup calculation");
-        button3.setOnAction((event) -> {
             fileManager.calculationFileSetup();
         });
         
-        setup.getChildren().add(new Label("Setup:"));
-        setup.getChildren().add(button);
-        setup.getChildren().add(button1);
-        setup.getChildren().add(button2);
-        setup.getChildren().add(button3);
+        box.getChildren().add(setupButton);
         
         //Colonna del register
         VBox register = new VBox();
@@ -114,17 +98,17 @@ public class WaterBalanceFX extends Application{
         register.setPadding(new Insets(10,10,10,10));
         register.setAlignment(Pos.CENTER);
         
-        Button button4 = new Button("register station");
+        Button button4 = new Button("STATION");
         button4.setOnAction((event) -> {
             fileManager.stationDatasRegistration();
         });
         
-        Button button5 = new Button("register field");
+        Button button5 = new Button("FIELD");
         button5.setOnAction((event) -> {
             fileManager.fieldDatasRegistration();
         });
         
-        Button button6 = new Button("register constant");
+        Button button6 = new Button("CONSTANT");
         button6.setOnAction((event) -> {
             forManager.constant();
         });
@@ -183,7 +167,9 @@ public class WaterBalanceFX extends Application{
         ete.getChildren().add(new Label("Ete:"));
         ete.getChildren().add(button12);
         
-        layout.getChildren().addAll(setup,register,report,ete);
+        Label text = new Label("prima cosa da fare\nseconda cosa da fare");
+        
+        layout.getChildren().addAll(text,box,register,report,ete);
         
         Scene scene = new Scene(layout);
         
