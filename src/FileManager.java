@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,6 +34,8 @@ public class FileManager{
     //in questo caso vengono messi fissi riferendoci alla riga 8 dell'excel
     //inviato da Laura, per verificarne il funzionamento e sistemare i calcoli
     public void stationDatasRegistration() {
+        
+        /*
         manager.ws.setMinTemp(0.3);
         manager.ws.setMaxTemp(1.3);
         manager.ws.setAvgTemp(0.8);
@@ -41,10 +45,59 @@ public class FileManager{
         manager.ws.setRhMax(94);
         manager.ws.setWind(0.4);
         manager.ws.setAltitudine(232);
-        manager.ws.setLatitudine(0.785281808113982);
-        manager.ws.setDate("01-01-2021");
-        String[] parts = manager.ws.getDate().split("-");
-        manager.ws.setJulianDay(Integer.valueOf(parts[0]));
+        manager.ws.setLatitudine(0.7852818081139820);
+        */
+        
+        
+        System.out.println("minTemp(C):");
+        Double minTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setMinTemp(minTemp);
+        
+        System.out.println("maxTemp(C):");
+        Double maxTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setMaxTemp(maxTemp);
+        
+        System.out.println("avgTemp(C):");
+        Double avgTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setAvgTemp(avgTemp);
+        
+        System.out.println("rain(mm):");
+        Double rain = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setRain(rain);
+        
+        System.out.println("rs(W/m^2):");
+        Double rs = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setRs(rs);
+        
+        System.out.println("rhMin(%):");
+        Double rhMin = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setRhMin(rhMin);
+        
+        System.out.println("rhMax(%):");
+        Double rhMax = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setRhMax(rhMax);
+        
+        System.out.println("wind(m/s):");
+        Double wind = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setWind(wind);
+        
+        System.out.println("altitude(m):");
+        Double altitude = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setAltitudine(altitude);
+        
+        System.out.println("latitude(m):");
+        Double latitude = Double.valueOf(WaterBalanceFX.scanner.nextLine());
+        manager.ws.setLatitudine(latitude);
+        
+        
+        manager.ws.setJulianDay(manager.ws.getJulianDay() + 1);
+        
+        if(manager.ws.getDate().equals("0")) {
+            manager.ws.setDate("2021-01-01");
+        } else {
+            manager.ws.setDate(LocalDate.parse(manager.ws.getDate()).plusDays(1).toString());
+        }
+        
     }
     
     //Scrittura dei dati sul file

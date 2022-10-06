@@ -26,7 +26,7 @@ public class WeatherStation {
         this.wind = 0;
         this.altitudine = 0;
         this.latitudine = 0;
-        this.date = "";
+        this.date = "0";
         this.julianDay = 0;
         
     }
