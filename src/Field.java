@@ -37,6 +37,7 @@ public class Field {
     public String getSeed() {
         return seed;
     }
+    
     public void setSabbia(double sabbia) {
         this.sabbia = sabbia;
     }
