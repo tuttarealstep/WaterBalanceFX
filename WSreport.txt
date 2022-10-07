@@ -11,3 +11,29 @@ wind(m/s): 0.4
 altitude(m): 232.0
 latitude(m): 0.785281808113982
 
+JulianDay: 2
+date(DD-MM-YYYY): 2021-01-02
+minTemp(C): 0.3
+maxTemp(C): 3.5
+avgTemp(C): 1.9
+rain(mm): 37.0
+rs(W/m^2): 0.52
+rhMin(%): 93.0
+rhMax(%): 97.0
+wind(m/s): 0.1
+altitude(m): 232.0
+latitude(m): 0.785281808113982
+
+JulianDay: 3
+date(DD-MM-YYYY): 2021-01-03
+minTemp(C): 1.1
+maxTemp(C): 6.2
+avgTemp(C): 3.65
+rain(mm): 14.8
+rs(W/m^2): 3.97
+rhMin(%): 87.0
+rhMax(%): 100.0
+wind(m/s): 0.3
+altitude(m): 232.0
+latitude(m): 0.785281808113982
+

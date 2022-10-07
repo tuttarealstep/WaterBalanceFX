@@ -117,9 +117,6 @@ public class FormulaManager {
     public double umidmm() {
         String name = "UMIDmm";
         
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }        
         //gp = giorno precedente
         //UMIDmm(gp)+rain(gp)+IRRIGutile(gp)-ete(gp)-PERCmm-RUSCmm
         
@@ -200,10 +197,6 @@ public class FormulaManager {
     public double densAppar() {
         String name = "densAppar";
         
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
-        
         //la densAppar dipende dal Corg (carbonio organico), quindi se non c'è si fa la conversione
         //densAppar = 1,66-0,318*RADQ(Corg)
         
@@ -219,10 +212,6 @@ public class FormulaManager {
     public double slopeSat() {
         String name = "slopeSat";
         
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
-        
         //Slope Sat vap press def = 4098 * (0.6108 * EXP(17.27 * avgTemp /
             //(avgTemp + 237.3))) / (avgTemp + 237.3)^2            
             double slopeSat = 4098 * (0.6108 * Math.exp(17.27 * ws.getAvgTemp() /
@@ -237,10 +226,6 @@ public class FormulaManager {
     
     public double rn() {
         String name = "rn";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //Rn = Rns - Rnl
         double rn = rns() - rnl();
@@ -255,10 +240,6 @@ public class FormulaManager {
     public double rns() {
         String name = "rns";
         
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
-        
         //Rns = Rs(MJ m^-2 d^-1) * (1-0.23)
         double rns = ws.getRs() * (1-0.23);
         
@@ -271,10 +252,6 @@ public class FormulaManager {
     
     public double rnl() {
         String name = "rnl";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //Rnl = =4,903*10^(-9)*
             //MEDIA((maxTemp + 273.16)^4;(minTemp + 273.16)^4) * (0.34-0.14*RADQ(ea))*
@@ -293,10 +270,7 @@ public class FormulaManager {
     
     public double psiCost() {
         String name = "psiCost";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //psicr. costant = 0.000665 * atm pressure (kPa)
         
         double psiCost = 0.000665 * atmPressure();
@@ -310,10 +284,7 @@ public class FormulaManager {
     
     public double atmPressure() {
         String name = "atmPressure";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //101.3 * (((293 - 0.0065 * altitude) / 293) ^ 5.26)        
         double atmPressure = 101.3 * Math.pow(((293 - 0.0065 * ws.getAltitudine()) / 293.0), 5.26);
         
@@ -326,10 +297,7 @@ public class FormulaManager {
     
     public double es() {
         String name = "es";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //es = media tra e^0Tmax, e^0Tmin
         //e0Tmax = 0.6108*Math.exp((17.27*Tmax)/(Tmax+237.3))
         //e0Tmin = 0.6108*Math.exp((17,27*minTemp)/(minTemp+237,3))
@@ -346,10 +314,6 @@ public class FormulaManager {
     public double eTmax() {
         String name = "eTmax";
         
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
-        
         //e0Tmax = 0.6108*Math.exp((17.27*Tmax)/(Tmax+237.3))
         double eTmax = 0.6108*Math.exp((17.27*ws.getMaxTemp())/(ws.getMaxTemp()+237.3));
         
@@ -362,10 +326,6 @@ public class FormulaManager {
     
     public double eTmin() {
         String name = "eTmin";
-        
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //e0Tmin = 0.6108*Math.exp((17,27*minTemp)/(minTemp+237,3))
         double eTmin = 0.6108*Math.exp((17.27*ws.getMinTemp())/(ws.getMinTemp()+237.3));
@@ -380,11 +340,6 @@ public class FormulaManager {
     public double ea() {
         String name = "ea";
         
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
-        
         //ea = (eTmin * RHmax / 100 + eTmax * RHmin / 100) / 2        
         double ea = (eTmin() * ws.getRhMax() / 100.0 + eTmax() * ws.getRhMin() / 100.0) / 2.0;
         
@@ -397,10 +352,6 @@ public class FormulaManager {
     
     public double rso() {
         String name = "rso";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //Rso = (0.75 + 0.00002 * this.altitudine) * Ra
         
@@ -415,10 +366,7 @@ public class FormulaManager {
     
     public double ra() {
         String name = "ra";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //Ra = 24 * 60 / PI.GRECO() * 0.082 * invRelDist *(sunsetHourAngle *
             //SEN(latitudine) * SEN(solarDeclination) + COS(latitudine)*
             //COS(solarDeclination) * SEN(sunsetHourAngle))
@@ -436,10 +384,6 @@ public class FormulaManager {
     
     public double invRelDist() {
         String name = "invRelDist";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //invRelDist = 1 + 0.033 * COS(2 * PI.GRECO() * julianDay / 365)        
         double invRelDist = 1 + 0.033 * Math.cos(2 * Math.PI * ws.getJulianDay() / 365.0);
@@ -453,10 +397,7 @@ public class FormulaManager {
     
     public double sunsetHourAngle() {
         String name = "sunsetHourAngle";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //sunset hour angle = ARCCOS(-TAN(latitudine)*TAN(solarDeclination))
         double sunsetHourAngle = Math.acos(-Math.tan(ws.getLatitudine()) * Math.tan(solarDeclination()));
         
@@ -470,10 +411,6 @@ public class FormulaManager {
     
     public double solarDeclination() {
         String name = "solarDeclination";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
         
         //solarDeclination = 0.409 * Math.sen(2 * Math.PI * this.julianDay / 365 - 1.39)
         double solarDeclination = 0.409 * Math.sin(2 * Math.PI * ws.getJulianDay() / 365.0 - 1.39);
@@ -488,10 +425,7 @@ public class FormulaManager {
     
     public double et0() {
         String name = "et0";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //(0.408 * slopeSat * (Rn - G) + psicrCost * 900 / (avgTemp + 273) * wind *
             //(es - ea))/(slopeSat + psicrCost * (1 + 0.34 * wind))
         //G è un valore messo fisso a 0 nei modelli
@@ -511,10 +445,7 @@ public class FormulaManager {
     //calcolo finale per il calcolo dell'evapotraspirazione 
     public double ete() {
         String name = "ete";
-        //controllo se il calcolo è già stato fatto
-        if(alreadyDone(name)) {
-            return calculations.get(name);
-        }
+        
         //ETe = Etc * Ks
         double ete = etc() * ks();
         

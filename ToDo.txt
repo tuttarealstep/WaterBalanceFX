@@ -1,12 +1,11 @@
+Fare un file con la lista dei dati meteo giorno per giorno, in modo da farli leggere automaticamente dalla registrazione della stazione
+Sistemare il kc in modo che utilizzi le tabelle d'appoggio
+
 corg = carbonio organico
 rivedere conversione tra SO (sostanza organica) e Corg (carbonio organico)
 coefficiente: 1.72 per la conversione
 
-
 irrigutile da verificare con Raffaele
-Fare un file con la lista dei dati meteo giorno per giorno, in modo da farli leggere automaticamente dalla registrazione della stazione
-Sistemare il kc in modo che utilizzi le tabelle d'appoggio
-
 
 l'umidità non supera la capacità di campo
 se l'umidità di campo è sotto CC allora il ks diminuisce

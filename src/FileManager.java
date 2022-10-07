@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,7 +47,39 @@ public class FileManager{
         manager.ws.setLatitudine(0.7852818081139820);
         */
         
+        //rimuovere la funzione di non ripetizione dei calcoli che vanno rifatti
+        //tenere non ricalcolabili i valori fissi (field + costanti)
         
+        try(Scanner scanFile = new Scanner(Paths.get("WSDatas.txt"))) {
+            String row = "";
+            
+            for(int i = 0; i < manager.ws.getJulianDay() + 2; i++) {
+                row = scanFile.nextLine();
+            }
+            System.out.println(row);
+            String[] parts = row.split(";");
+            manager.ws.setMinTemp(Double.valueOf(parts[0]));
+            manager.ws.setMaxTemp(Double.valueOf(parts[1]));
+            manager.ws.setAvgTemp(Double.valueOf(parts[2]));
+            manager.ws.setRain(Double.valueOf(parts[3]));
+            manager.ws.setRs(Double.valueOf(parts[4]));
+            manager.ws.setRhMin(Double.valueOf(parts[5]));
+            manager.ws.setRhMax(Double.valueOf(parts[6]));
+            manager.ws.setWind(Double.valueOf(parts[7]));
+            manager.ws.setAltitudine(Double.valueOf(parts[8]));
+            manager.ws.setLatitudine(Double.valueOf(parts[9]));
+
+            manager.ws.setJulianDay(manager.ws.getJulianDay() + 1);
+
+            if(manager.ws.getDate().equals("0")) {
+                manager.ws.setDate("2021-01-01");
+            } else {
+                manager.ws.setDate(LocalDate.parse(manager.ws.getDate()).plusDays(1).toString());
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        /*
         System.out.println("minTemp(C):");
         Double minTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
         manager.ws.setMinTemp(minTemp);
@@ -88,15 +119,9 @@ public class FileManager{
         System.out.println("latitude(m):");
         Double latitude = Double.valueOf(WaterBalanceFX.scanner.nextLine());
         manager.ws.setLatitudine(latitude);
+        */
         
         
-        manager.ws.setJulianDay(manager.ws.getJulianDay() + 1);
-        
-        if(manager.ws.getDate().equals("0")) {
-            manager.ws.setDate("2021-01-01");
-        } else {
-            manager.ws.setDate(LocalDate.parse(manager.ws.getDate()).plusDays(1).toString());
-        }
         
     }
     

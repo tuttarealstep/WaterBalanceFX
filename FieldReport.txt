@@ -4,3 +4,15 @@ carbonio organico/corg(%): 0.79
 prof(mm): 150.0
 kc: 0.3
 
+sabbia(%): 31.2
+argilla(%): 50.1
+carbonio organico/corg(%): 0.79
+prof(mm): 150.0
+kc: 0.3
+
+sabbia(%): 31.2
+argilla(%): 50.1
+carbonio organico/corg(%): 0.79
+prof(mm): 150.0
+kc: 0.3
+
