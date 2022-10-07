@@ -29,26 +29,8 @@ public class FileManager{
         }
     }
     
-    //I dati possono essere richiesti per ognuno per inserirli manualmente
-    //in questo caso vengono messi fissi riferendoci alla riga 8 dell'excel
-    //inviato da Laura, per verificarne il funzionamento e sistemare i calcoli
+    //Dati presi dal file WSDatas.txt, in modo da inserirli automaticamente per ogni giorno
     public void stationDatasRegistration() {
-        
-        /*
-        manager.ws.setMinTemp(0.3);
-        manager.ws.setMaxTemp(1.3);
-        manager.ws.setAvgTemp(0.8);
-        manager.ws.setRain(3.8);
-        manager.ws.setRs(0.86);
-        manager.ws.setRhMin(90);
-        manager.ws.setRhMax(94);
-        manager.ws.setWind(0.4);
-        manager.ws.setAltitudine(232);
-        manager.ws.setLatitudine(0.7852818081139820);
-        */
-        
-        //rimuovere la funzione di non ripetizione dei calcoli che vanno rifatti
-        //tenere non ricalcolabili i valori fissi (field + costanti)
         
         try(Scanner scanFile = new Scanner(Paths.get("WSDatas.txt"))) {
             String row = "";
@@ -79,49 +61,6 @@ public class FileManager{
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        /*
-        System.out.println("minTemp(C):");
-        Double minTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setMinTemp(minTemp);
-        
-        System.out.println("maxTemp(C):");
-        Double maxTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setMaxTemp(maxTemp);
-        
-        System.out.println("avgTemp(C):");
-        Double avgTemp = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setAvgTemp(avgTemp);
-        
-        System.out.println("rain(mm):");
-        Double rain = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setRain(rain);
-        
-        System.out.println("rs(W/m^2):");
-        Double rs = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setRs(rs);
-        
-        System.out.println("rhMin(%):");
-        Double rhMin = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setRhMin(rhMin);
-        
-        System.out.println("rhMax(%):");
-        Double rhMax = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setRhMax(rhMax);
-        
-        System.out.println("wind(m/s):");
-        Double wind = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setWind(wind);
-        
-        System.out.println("altitude(m):");
-        Double altitude = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setAltitudine(altitude);
-        
-        System.out.println("latitude(m):");
-        Double latitude = Double.valueOf(WaterBalanceFX.scanner.nextLine());
-        manager.ws.setLatitudine(latitude);
-        */
-        
-        
         
     }
     
@@ -271,5 +210,19 @@ public class FileManager{
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+    
+    //conteggio delle righe del file
+    public int countRows(String file) {
+        int rows = 0;
+        try(Scanner scanFile = new Scanner(Paths.get(file))) {
+            while(scanFile.hasNextLine()) {
+                rows++;
+                scanFile.nextLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rows;
     }
 }

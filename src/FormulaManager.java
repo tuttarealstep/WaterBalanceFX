@@ -171,13 +171,18 @@ public class FormulaManager {
     
     public double kc() {
         
+        //Per cipolla:
         //SE(gradiGiorno < 50 allora 0.4 ;
         //Altrimenti SE(E(gradiGiorno >= 50; gradiGiorno < 600) allora 0.5 ;
         //SE(E(gradiGiorno >= 600 ; gradiGiorno < 900) allora 0.7 ;
         //SE(E(gragiGiorno >= 900 ; gradiGiorno < 1400) allora 1 ;
         //SE(E(gradiGiorno >= 1400 ; gradiGiorno < 2400) allora 0.8 ;
         //SE(E(gradiGiorno >= 2400 ; gradiGiorno <= 2600) allora 0.4 ;
-        //altrimenti 0,01)))))))        
+        //altrimenti 0,01)))))))
+        
+        if(field.getSeed().equalsIgnoreCase("cipolla")) {
+            
+        }
         
         return 0;
     }

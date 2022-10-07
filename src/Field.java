@@ -5,7 +5,8 @@ public class Field {
     private double argilla;
     private double corg;
     private double profmm;
-    private double kc;    
+    private double kc;  
+    private String seed;
     
     public Field() {
         
@@ -14,6 +15,7 @@ public class Field {
         this.corg = 0;
         this.profmm = 0;
         this.kc = 0;
+        this.seed = "cipolla";
             
     }
 
@@ -32,6 +34,9 @@ public class Field {
     public double getKc() {
         return kc;
     } 
+    public String getSeed() {
+        return seed;
+    }
     public void setSabbia(double sabbia) {
         this.sabbia = sabbia;
     }
@@ -46,5 +51,9 @@ public class Field {
     }
     public void setKc(double kc) {
         this.kc = kc;
-    } 
+    }
+    public void setSeed(String seed) {
+        this.seed = seed;
+    }
+    
 }
