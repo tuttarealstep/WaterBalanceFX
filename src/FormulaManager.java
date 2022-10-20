@@ -82,24 +82,34 @@ public class FormulaManager {
     public double ks() {
         //Calcolo il Ks del bilancio idrico
         
+        String name = "ks";
+        
         //KS = se UMIDVOL% < PA% v/v == 0 altrimenti
         //minore tra 1 e (UMIDVOL% - PA% v/v)/(LIr% v/v - PA% v/v)
         
         double paPerc = calculations.get("PAperc");
         
+        double ks = (umidvol() - paPerc)/(calculations.get("LirPerc") - paPerc);
+        double irrigUtile = 0;
+        
         if (umidvol() < paPerc) {
-            calculations.put("IRRIGutile", 10.0);
-            return 0;
-        } else if((umidvol() - paPerc)/(calculations.get("LirPerc") - paPerc) < 1) {
-            double ks = (umidvol() - paPerc)/(calculations.get("LirPerc") - paPerc);
+            irrigUtile = 10;
+            ks = 0;
+        } else if(ks < 1) {
             if (ks < 0.7) {
-                calculations.put("IRRIGutile", 10.0);
+                irrigUtile = 10;
             }
-            return (umidvol() - paPerc)/(calculations.get("LirPerc") - paPerc);
         } else {
-            calculations.put("IRRIGutile", 0.0);
-            return 1;
+            irrigUtile = 0;
+            ks = 1;
         }
+        
+        calculations.put("IRRIGutile", irrigUtile);
+        calculations.put(name, ks);
+        
+        System.out.println(name + ": " + ks);
+        
+        return ks;
     } 
     
     public double umidvol() {
@@ -172,7 +182,7 @@ public class FormulaManager {
     public double kc() {
         //se la fase fenologica è ancora a 0 (suolo nudo), il kc rimane a 0.3
         
-        //Per cipolla:
+        //Per cipolla, ma funzionano nello stesso modo tutti:
         //SE(gradiGiorno < 50 allora 0.4 ;
         //Altrimenti SE(E(gradiGiorno >= 50; gradiGiorno < 600) allora 0.5 ;
         //SE(E(gradiGiorno >= 600 ; gradiGiorno < 900) allora 0.7 ;
@@ -181,19 +191,97 @@ public class FormulaManager {
         //SE(E(gradiGiorno >= 2400 ; gradiGiorno <= 2600) allora 0.4 ;
         //altrimenti 0,01)))))))
         
+        double gradiGiorno = gradiGiorno();
+        
         if(field.getPhenophase() != 0) {
            if(field.getSeed().equalsIgnoreCase("cipolla")) {
-            
+               for(int i = 0; i < WaterBalanceFX.cipolla.length; i++) {
+                  if(i == 0) {
+                      if(gradiGiorno < WaterBalanceFX.cipolla[i].getGdd()) {
+                          field.setKc(WaterBalanceFX.cipolla[i].getKc());
+                      } 
+                  } else if(i > 0 && i <= 5) {
+                      if (gradiGiorno >= WaterBalanceFX.cipolla[i].getGdd() &&
+                          gradiGiorno < WaterBalanceFX.cipolla[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.cipolla[i].getKc());
+                      }
+                  } else if(i == 5) {
+                      if (gradiGiorno >= WaterBalanceFX.cipolla[i].getGdd() &&
+                          gradiGiorno <= WaterBalanceFX.cipolla[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.cipolla[i].getKc());
+                      }
+                      break;
+                  }
+               }
            }
            if(field.getSeed().equalsIgnoreCase("patata")) {
-               
+               for(int i = 0; i < WaterBalanceFX.patata.length; i++) {
+                  if(i == 0) {
+                      if(gradiGiorno < WaterBalanceFX.patata[i].getGdd()) {
+                          field.setKc(WaterBalanceFX.patata[i].getKc());
+                      } 
+                  } else if(i > 0 && i <= 5) {
+                      if (gradiGiorno >= WaterBalanceFX.patata[i].getGdd() &&
+                          gradiGiorno < WaterBalanceFX.patata[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.patata[i].getKc());
+                      }
+                  } else if(i == 5) {
+                      if (gradiGiorno >= WaterBalanceFX.patata[i].getGdd() &&
+                          gradiGiorno <= WaterBalanceFX.patata[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.patata[i].getKc());
+                      }
+                      break;
+                  }
+               }
            }
            if(field.getSeed().equalsIgnoreCase("pomodoro")) {
-               
+               for(int i = 0; i < WaterBalanceFX.pomodoro.length; i++) {
+                  if(i == 0) {
+                      if(gradiGiorno < WaterBalanceFX.pomodoro[i].getGdd()) {
+                          field.setKc(WaterBalanceFX.pomodoro[i].getKc());
+                      } 
+                  } else if(i > 0 && i <= 5) {
+                      if (gradiGiorno >= WaterBalanceFX.pomodoro[i].getGdd() &&
+                          gradiGiorno < WaterBalanceFX.pomodoro[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.pomodoro[i].getKc());
+                      }
+                  } else if(i == 5) {
+                      if (gradiGiorno >= WaterBalanceFX.pomodoro[i].getGdd() &&
+                          gradiGiorno <= WaterBalanceFX.pomodoro[i+1].getGdd()) {
+                      field.setKc(WaterBalanceFX.pomodoro[i].getKc());
+                      }
+                      break;
+                  }
+               }
            }
+           return field.getKc();
         }
         
         return 0.3;
+    }
+    
+    public double gradiGiorno() {
+        String name = "gradiGiorno";
+        
+        //gradiGiorno = gradiUtili + gradiGiorno(gp)
+        double gradiGiorno = gradiUtili() + WaterBalanceFX.fileManager.valueFromFile("gradiGiorno");
+        
+        calculations.put(name, gradiGiorno);
+        
+        return gradiGiorno;
+    }
+    
+    public double gradiUtili() {
+        String name = "gradiUtili";
+        
+        //gradiUtili =+((Tmax+Tmin)/2)- minCard
+        double gradiUtili = ((ws.getMaxTemp() + ws.getMinTemp()) / 2) - field.getMinCard();
+        
+        calculations.put(name, gradiUtili);
+        
+        System.out.println(name + ": " + gradiUtili);
+        
+        return gradiUtili;
     }
     
     //secondo calcolo importante per il calcolo della ETe con ETc (evapotraspirazione coltura)
@@ -204,9 +292,9 @@ public class FormulaManager {
             //(es - ea))/(slopeSat + psicrCost * (1 + 0,34 * wind))
         //G è un valore che nei modelli è fissato a 0 
         //Il valore di G indica il flusso di calore nel suolo. Questo è molto piccolo di solito e quindi possiamo trascurare.
-        System.out.println("etc: " + (field.getKc() * et0()));
+        System.out.println("etc: " + (kc() * et0()));
         
-        return field.getKc() * et0();
+        return kc() * et0();
     }
     
     public double densAppar() {
