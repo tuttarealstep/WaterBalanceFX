@@ -105,7 +105,27 @@ public class FileManager{
     public void fieldDatasRegistration() {
         manager.field.setSabbia(31.2);
         manager.field.setArgilla(50.1);
-        manager.field.setCorg(0.79);
+        //Richiesta della componente organica del terreno
+        //Se viene scelto SO, si converte dividendo per un valore fisso 1.72
+        System.out.println("Scegliere il dato da inserire:\n"
+                + "1. Sostanza organica (S.O.)\n"
+                + "2. Carbonio organico (Corg)");
+        Scanner scanner = new Scanner(System.in);
+        int choice = Integer.valueOf(scanner.nextLine());
+        System.out.println("Digitare il valore:");
+        double value = Double.valueOf(scanner.nextLine());
+        if(choice == 1) {
+            manager.field.setCorg(value / 1.72);
+        } else if (choice == 2) {
+           manager.field.setCorg(value); 
+        }
+        System.out.println("Inserire il tipo di coltura:\n"
+                + "cipolla\n"
+                + "patata\n"
+                + "pomodoro");
+        String seed = scanner.nextLine();
+        manager.field.setSeed(seed);
+        System.out.println(manager.field.getSeed());
         manager.field.setProfmm(150);
         manager.field.setKc(0.3);
     }
@@ -115,7 +135,7 @@ public class FileManager{
         try(FileWriter writer = new FileWriter("FieldReport.txt",true)) {
             writer.write("sabbia(%): " + manager.field.getSabbia() + "\n" +
                         "argilla(%): " + manager.field.getArgilla() + "\n" +
-                        "carbonio organico/corg(%): " + manager.field.getCorg() + "\n" +
+                        "corg(%): " + manager.field.getCorg() + "\n" +
                         "prof(mm): " + manager.field.getProfmm() + "\n" +
                         "kc: " + manager.field.getKc() + "\n" +
                         "\n");

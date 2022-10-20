@@ -170,6 +170,7 @@ public class FormulaManager {
     }
     
     public double kc() {
+        //se la fase fenologica è ancora a 0 (suolo nudo), il kc rimane a 0.3
         
         //Per cipolla:
         //SE(gradiGiorno < 50 allora 0.4 ;
@@ -180,11 +181,19 @@ public class FormulaManager {
         //SE(E(gradiGiorno >= 2400 ; gradiGiorno <= 2600) allora 0.4 ;
         //altrimenti 0,01)))))))
         
-        if(field.getSeed().equalsIgnoreCase("cipolla")) {
+        if(field.getPhenophase() != 0) {
+           if(field.getSeed().equalsIgnoreCase("cipolla")) {
             
+           }
+           if(field.getSeed().equalsIgnoreCase("patata")) {
+               
+           }
+           if(field.getSeed().equalsIgnoreCase("pomodoro")) {
+               
+           }
         }
         
-        return 0;
+        return 0.3;
     }
     
     //secondo calcolo importante per il calcolo della ETe con ETc (evapotraspirazione coltura)
@@ -194,6 +203,7 @@ public class FormulaManager {
         //ET0 = (0.408 * slopeSat * (Rn - G) + psicrCost * 900 / (avgTemp + 273) * wind *
             //(es - ea))/(slopeSat + psicrCost * (1 + 0,34 * wind))
         //G è un valore che nei modelli è fissato a 0 
+        //Il valore di G indica il flusso di calore nel suolo. Questo è molto piccolo di solito e quindi possiamo trascurare.
         System.out.println("etc: " + (field.getKc() * et0()));
         
         return field.getKc() * et0();

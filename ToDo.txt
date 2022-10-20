@@ -1,23 +1,16 @@
-Sistemare il kc in modo che utilizzi le tabelle d'appoggio
-
-corg = carbonio organico
-rivedere conversione tra SO (sostanza organica) e Corg (carbonio organico)
-coefficiente: 1.72 per la conversione
-
 da verificare con Raffaele:
 irrigutile si può calcolare con la formula SE(ks < 0.7) allora IRRIGutile = 10mm?
 i gradi giorno e i gradi utili devono essere registrati solo a partire dalla semina?
-G per la radiazione, che cosa indica? come mai è sempre a 0?
 pressione atmosferica può andare bene con la formula già presente?
 ottenere le tabelle di appoggio per tutte e 3 le colture
+
+Sistemare il kc in modo che utilizzi le tabelle d'appoggio
 
 l'umidità non supera la capacità di campo
 se l'umidità di campo è sotto CC allora il ks diminuisce
 
-Acqua disponibile massima varia in base al limite intervento irriguo che si basa sulla coltura
-Durante il disegno dei campi andrà inserito il tipo di coltura per la variazione del Lir
-La densAppar deve poter essere sovrascritto
-
+Acqua disponibile massima varia in base al limite intervento irriguo che si basa sulla coltura, quindi cambiare il lir in base al tipo di coltura
+con le tabelle e il tipo di coltura variano il kc e il Lir
 
 COMPLETATI:
 
@@ -36,4 +29,9 @@ RUSCmm si calcola con UMIDmm(gp), Ete(gp), pioggia(gp) e irrigutile(gp)
 UMIDmm si calcola con UMIDmm(gp), Ete(gp), pioggia(gp) e irrigutile(gp) (file calculations ora contiene i calcoli)
 irrigutile mm va messo a 10mm ogni volta che il ks va in stress (<0.7) (formula in ks applicata)
 DensAppar = da calcolare attraverso la formula di Laura (calcolo con Corg)
-Fare un file con la lista dei dati meteo giorno per giorno, in modo da farli leggere automaticamente dalla registrazione della stazione
+Fare un file con la lista dei dati meteo giorno per giorno, in modo da farli leggere automaticamente dalla registrazione della stazione (file creato)
+corg = carbonio organico
+rivedere conversione tra SO (sostanza organica) e Corg (carbonio organico) (il programma richiede uno dei due valori)
+coefficiente: 1.72 per la conversione
+La densAppar deve poter essere sovrascritto (sovrascrittura possibile)
+Il valore di G indica il flusso di calore nel suolo. Questo è molto piccolo di solito e quindi possiamo trascurare (scritto nei commenti)
