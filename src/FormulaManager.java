@@ -133,7 +133,7 @@ public class FormulaManager {
         double umidMm = WaterBalanceFX.fileManager.valueFromFile("UMIDmm") +
                         WaterBalanceFX.fileManager.valueFromFile("rain") +
                         WaterBalanceFX.fileManager.valueFromFile("IRRIGutile") + 
-                        WaterBalanceFX.fileManager.valueFromFile("Ete") - 
+                        WaterBalanceFX.fileManager.valueFromFile("ete") - 
                         percMm() - ruscMm();
         
         calculations.put(name,umidMm);

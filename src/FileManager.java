@@ -37,6 +37,10 @@ public class FileManager{
             
             for(int i = 0; i < manager.ws.getJulianDay() + 2; i++) {
                 row = scanFile.nextLine();
+                if(row.contains("phenophase")) {
+                    String[] pheno = row.split(";");
+                    manager.field.setPhenophase(Integer.valueOf(pheno[1]));
+                }
             }
             System.out.println(row);
             String[] parts = row.split(";");

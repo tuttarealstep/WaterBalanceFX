@@ -67,8 +67,7 @@ public class WaterBalanceFX{
                     + "1. Sovrascrivi la densAppar\n"
                     + "2. Fai il setup dei file(obbligatorio per le simulazioni)\n"
                     + "3. Seleziona la fase fenologica\n"
-                    + "4. Simula i calcoli prima della semina\n"
-                    + "5. Simula i calcoli dalla semina in poi\n"
+                    + "4. Simula i calcoli\n"
                     + "0. Esci");
             
             int choice = Integer.valueOf(scanner.nextLine());
@@ -111,21 +110,6 @@ public class WaterBalanceFX{
                     //8. calcolo ete, così da riempire la lista dei calcoli
                     //9. report dei calcoli fatti per calcolare ete
                     for(int i = 0; i < fileManager.countRows("WSDatas.txt") - 1; i++) {
-                       fileManager.stationDatasRegistration();
-                       fileManager.stationDatasReport();
-                       forManager.ete();
-                       fileManager.calculationsReport();
-                    }
-                    break;
-                case 5:
-                    field.setPhenophase(1);
-                    System.out.println("Inserita la semina");
-                    
-                    //6. registro i dati della stazione meteo
-                    //7. report dei dati della stazione meteo
-                    //8. calcolo ete, così da riempire la lista dei calcoli
-                    //9. report dei calcoli fatti per calcolare ete
-                    for(int i = 0; i < fileManager.countRows("WSDatas1.txt") - 1; i++) {
                        fileManager.stationDatasRegistration();
                        fileManager.stationDatasReport();
                        forManager.ete();
