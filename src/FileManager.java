@@ -37,11 +37,10 @@ public class FileManager{
             
             for(int i = 0; i < manager.ws.getJulianDay() + 2; i++) {
                 row = scanFile.nextLine();
-                if(row.contains("phenophase")) {
-                    String[] pheno = row.split(";");
-                    manager.field.setPhenophase(Integer.valueOf(pheno[1]));
-                }
             }
+           
+            
+                
             System.out.println(row);
             String[] parts = row.split(";");
             manager.ws.setMinTemp(Double.valueOf(parts[0]));
@@ -54,6 +53,10 @@ public class FileManager{
             manager.ws.setWind(Double.valueOf(parts[7]));
             manager.ws.setAltitudine(Double.valueOf(parts[8]));
             manager.ws.setLatitudine(Double.valueOf(parts[9]));
+            
+            if(row.contains("phenophase")) {
+                    manager.field.setPhenophase(Integer.valueOf(parts[11]));
+            }
 
             manager.ws.setJulianDay(manager.ws.getJulianDay() + 1);
 

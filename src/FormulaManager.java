@@ -191,23 +191,23 @@ public class FormulaManager {
         //SE(E(gradiGiorno >= 2400 ; gradiGiorno <= 2600) allora 0.4 ;
         //altrimenti 0,01)))))))
         
-        double gradiGiorno = gradiGiorno();
+        double gradiGiorno = (ws.getMinTemp()+ws.getMaxTemp()) / 2;
         
         if(field.getPhenophase() != 0) {
            if(field.getSeed().equalsIgnoreCase("cipolla")) {
                for(int i = 0; i < WaterBalanceFX.cipolla.length; i++) {
                   if(i == 0) {
-                      if(gradiGiorno < WaterBalanceFX.cipolla[i].getGdd()) {
+                      if(gradiGiorno() < WaterBalanceFX.cipolla[i].getGdd()) {
                           field.setKc(WaterBalanceFX.cipolla[i].getKc());
                       } 
                   } else if(i > 0 && i <= 5) {
-                      if (gradiGiorno >= WaterBalanceFX.cipolla[i].getGdd() &&
-                          gradiGiorno < WaterBalanceFX.cipolla[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.cipolla[i].getGdd() &&
+                          gradiGiorno() < WaterBalanceFX.cipolla[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.cipolla[i].getKc());
                       }
                   } else if(i == 5) {
-                      if (gradiGiorno >= WaterBalanceFX.cipolla[i].getGdd() &&
-                          gradiGiorno <= WaterBalanceFX.cipolla[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.cipolla[i].getGdd() &&
+                          gradiGiorno() <= WaterBalanceFX.cipolla[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.cipolla[i].getKc());
                       }
                       break;
@@ -217,17 +217,17 @@ public class FormulaManager {
            if(field.getSeed().equalsIgnoreCase("patata")) {
                for(int i = 0; i < WaterBalanceFX.patata.length; i++) {
                   if(i == 0) {
-                      if(gradiGiorno < WaterBalanceFX.patata[i].getGdd()) {
+                      if(gradiGiorno() < WaterBalanceFX.patata[i].getGdd()) {
                           field.setKc(WaterBalanceFX.patata[i].getKc());
                       } 
                   } else if(i > 0 && i <= 5) {
-                      if (gradiGiorno >= WaterBalanceFX.patata[i].getGdd() &&
-                          gradiGiorno < WaterBalanceFX.patata[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.patata[i].getGdd() &&
+                          gradiGiorno() < WaterBalanceFX.patata[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.patata[i].getKc());
                       }
                   } else if(i == 5) {
-                      if (gradiGiorno >= WaterBalanceFX.patata[i].getGdd() &&
-                          gradiGiorno <= WaterBalanceFX.patata[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.patata[i].getGdd() &&
+                          gradiGiorno() <= WaterBalanceFX.patata[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.patata[i].getKc());
                       }
                       break;
@@ -237,17 +237,17 @@ public class FormulaManager {
            if(field.getSeed().equalsIgnoreCase("pomodoro")) {
                for(int i = 0; i < WaterBalanceFX.pomodoro.length; i++) {
                   if(i == 0) {
-                      if(gradiGiorno < WaterBalanceFX.pomodoro[i].getGdd()) {
+                      if(gradiGiorno() < WaterBalanceFX.pomodoro[i].getGdd()) {
                           field.setKc(WaterBalanceFX.pomodoro[i].getKc());
                       } 
                   } else if(i > 0 && i <= 5) {
-                      if (gradiGiorno >= WaterBalanceFX.pomodoro[i].getGdd() &&
-                          gradiGiorno < WaterBalanceFX.pomodoro[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.pomodoro[i].getGdd() &&
+                          gradiGiorno() < WaterBalanceFX.pomodoro[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.pomodoro[i].getKc());
                       }
                   } else if(i == 5) {
-                      if (gradiGiorno >= WaterBalanceFX.pomodoro[i].getGdd() &&
-                          gradiGiorno <= WaterBalanceFX.pomodoro[i+1].getGdd()) {
+                      if (gradiGiorno() >= WaterBalanceFX.pomodoro[i].getGdd() &&
+                          gradiGiorno() <= WaterBalanceFX.pomodoro[i+1].getGdd()) {
                       field.setKc(WaterBalanceFX.pomodoro[i].getKc());
                       }
                       break;
