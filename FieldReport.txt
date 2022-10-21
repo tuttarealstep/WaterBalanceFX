@@ -1,6 +1,0 @@
-sabbia(%): 31.2
-argilla(%): 50.1
-corg(%): 0.79
-prof(mm): 150.0
-kc: 0.3
-

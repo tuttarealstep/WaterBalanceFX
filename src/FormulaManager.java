@@ -129,13 +129,17 @@ public class FormulaManager {
         
         //gp = giorno precedente
         //UMIDmm(gp)+rain(gp)+IRRIGutile(gp)-ete(gp)-PERCmm-RUSCmm
-        
-        double umidMm = WaterBalanceFX.fileManager.valueFromFile("UMIDmm") +
+        double umidMm = calculations.get("CCmm");
+
+        if(ws.getJulianDay() > 1)
+        {
+            umidMm = WaterBalanceFX.fileManager.valueFromFile("UMIDmm") +
                         WaterBalanceFX.fileManager.valueFromFile("rain") +
                         WaterBalanceFX.fileManager.valueFromFile("IRRIGutile") + 
                         WaterBalanceFX.fileManager.valueFromFile("ete") - 
                         percMm() - ruscMm();
-        
+        }
+
         calculations.put(name,umidMm);
         
         return umidMm;
@@ -191,6 +195,10 @@ public class FormulaManager {
         //SE(E(gradiGiorno >= 2400 ; gradiGiorno <= 2600) allora 0.4 ;
         //altrimenti 0,01)))))))
         
+        if(ws.getJulianDay() == 65){
+            System.out.println("ciao");
+        }
+
         double gradiGiorno = (ws.getMinTemp()+ws.getMaxTemp()) / 2;
         
         if(field.getPhenophase() != 0) {
